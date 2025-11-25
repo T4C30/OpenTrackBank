@@ -1,0 +1,30 @@
+@startuml DiagramaContenedores C1
+
+title Diagrama de Contenedores C1
+skinparam actorStyle awesome
+Actor Usuario
+
+package App{
+    rectangle Frontend as "Frontend\n(JavaFX)"
+    rectangle Backend  as "Backend\n(Java)"
+}
+
+package Dependencias{
+    rectangle Jackson as "Jackson"
+    rectangle JFX as "Java FX"
+}
+
+package Base_de_Datos{
+    database MongoDB as "Mongo DB (Prototipo)"
+    database JSON as "Fichero Json (Prototipado)."
+    database API as "Cuentas Bancaria (ALPHA)"
+}
+
+Usuario --> Frontend : Interacción
+Frontend --> Backend : Solicitudes
+Frontend ..> JFX : GUI
+Backend ..> Jackson : Serialización/Deserialización JSON
+Backend <|. JSON : Lectura/Escritura de datos
+Backend <|. MongoDB : Lectura/Escritura de datos
+Backend ..> API : Lectura de datos
+@enduml
