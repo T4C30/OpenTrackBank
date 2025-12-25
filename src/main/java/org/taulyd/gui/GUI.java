@@ -1,35 +1,28 @@
-package org.taulyd.otb;
+package org.taulyd.gui;
 
 import java.io.IOException;
 
+import org.taulyd.App;
+
 import javafx.application.Application;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ListView;
 import javafx.stage.Stage;
 
-public class Vista extends Application {
-    @FXML
-    private Label sueldo;
-
-    @FXML
-    private ListView tansacciones;
-
-
-    private static Scene scene;
+public class GUI extends Application {
+    public static Scene escena;
 
     @Override
-    public void start(Stage stage) throws IOException {
-        scene = new Scene(loadFXML("PantallaPrincipal"), 640, 480);
-        stage.setScene(scene);
-        stage.show();
+    public void start(Stage ventana) throws IOException {
+        escena = new Scene(loadFXML("/FXML/InicioSesion"), 640, 480);
+        escena.getStylesheets().add(estilo());
+        ventana.setScene(escena);
+        ventana.show();
     }
 
     static void setRoot(String fxml) throws IOException {
-        scene.setRoot(loadFXML(fxml));
+        escena.setRoot(loadFXML(fxml));
     }
 
     private static Parent loadFXML(String fxml) throws IOException {
@@ -37,8 +30,11 @@ public class Vista extends Application {
         return fxmlLoader.load();
     }
 
+    private static String estilo(){
+        return GUI.class.getResource("/CSS/Claro.css").toExternalForm();
+    }
+
     public static void iniciar(){
         launch();
     }
-
 }

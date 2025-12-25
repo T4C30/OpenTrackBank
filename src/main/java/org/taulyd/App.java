@@ -1,4 +1,6 @@
-package org.taulyd.otb;
+package org.taulyd;
+
+import org.taulyd.gui.GUI;
 
 /**
  * JavaFX App
@@ -6,7 +8,7 @@ package org.taulyd.otb;
 public class App{
 
     public static void main(String[] args) {
-        Vista.iniciar();
+        GUI.iniciar();
     }
 
 }
