@@ -1,0 +1,9 @@
+@startuml Diagrama de casos de UsecaseFontSize
+skinparam actorStyle awesome
+
+actor Usuario
+
+Usuario -> (Registrar contraseña)
+
+
+@enduml
