@@ -1,0 +1,65 @@
+@startuml Diagrama de componentes/paquetes
+left to right direction
+folder Java{
+    package GUI{
+        component JavaFX
+        component AndroidXML
+    }
+
+    package Torrente{
+        component Gestor
+    }
+
+    package "Modelo de Datos" as Modelo{
+        component "Enum Tema"
+        component "Enum Idioma/Localizacion"
+        component "Enum Estado del Banco"
+        component "Enum Etiqueta"
+        component "Enum Categoria"
+        component "Enum Ingreso/Pago"
+        component Transaccion
+        component Cuenta
+    }
+
+    package Seguridad{
+        component java.security.jgss
+        component java.security.sasl
+        component java.xml.crypto
+        component java.security
+        component java.security.cert
+        component java.security.interfaces
+        component java.security.spec
+        component javax.crypto
+        component javax.crypto.interfaces
+        component javax.crypto.spec
+        component javax.security.auth
+        component javax.security.auth.login
+        component javax.security.auth.spi
+        component javax.security.auth.x500
+        component javax.security.cert
+    }
+
+    package Miscelaneo{
+
+    }
+}
+
+folder Dependencias
+
+database Persistencia{
+    database SQLITE
+    database JSON
+    database API_REST
+    database MongoDB
+}
+
+note right of Seguridad : Componentes de Seguridad de Java por defecto
+note right of Torrente 
+    Streams o Pipes,
+    maneja los datos
+    y su persistencia
+end note
+
+Gestor --> Persistencia : Maneja
+
+@enduml

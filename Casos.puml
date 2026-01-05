@@ -1,9 +1,24 @@
 @startuml Diagrama de casos de UsecaseFontSize
 skinparam actorStyle awesome
+left to right direction
 
 actor Usuario
+package App{
+    usecase "Registrar/Iniciar sesion" as Registro
+    usecase "Ver Resumen de cuentas" as Cuentas
+    usecase "Editar datos de las transacciones de la cuenta bancaria" as Descripcion
+    usecase "Registrar un presupuesto mensual manualmente" as Presupuesto
+    usecase "Visionar y filtrar las transaciones" as Transaccion
+    usecase "Ajustar la accesibilidad de la aplicacion" as Ajuste
+    usecase "Revisar y añadir conexion a Bancos" as Conexion 
+}
 
-Usuario -> (Registrar contraseña)
-
+Usuario --> Registro
+Usuario --> Cuentas
+Usuario --> Descripcion
+Usuario --> Presupuesto
+Usuario --> Transaccion
+Usuario --> Ajuste
+Usuario --> Conexion
 
 @enduml
