@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Circle?>
+
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.taulyd.gui.PantallaPrincipal">
+   <top>
+      <HBox alignment="TOP_CENTER" prefWidth="200.0" spacing="230.0" BorderPane.alignment="CENTER">
+         <children>
+            <ImageView fx:id="menu" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Iconos_Imagenes/Menu.png" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="ajuste" fitHeight="64.0" fitWidth="73.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../Iconos_Imagenes/ajuste.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER">
+         <children>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="230.0">
+               <children>
+                  <ImageView fx:id="izquierda" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Iconos_Imagenes/Chevron%20left.png" />
+                     </image>
+                  </ImageView>
+                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" spacing="50.0">
+                     <children>
+                        <Label text="Label" />
+                        <HBox alignment="TOP_CENTER" prefWidth="200.0">
+                           <children>
+                              <Circle fx:id="punto" radius="15.0" stroke="BLACK" strokeType="INSIDE" />
+                           </children>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <ImageView fx:id="derecha" fitHeight="50.0" fitWidth="50.0" pickOnBounds="true" preserveRatio="true" rotate="180.0">
+                     <image>
+                        <Image url="@../Iconos_Imagenes/Chevron%20left.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </HBox>
+            <Label fx:id="entidadBancaria" text="Entidad bancaria" />
+            <Label fx:id="resumenMensual" text="Resumen Mensual" />
+            <VBox>
+               <children>
+                  <HBox fx:id="totalDinero" alignment="TOP_CENTER" spacing="50.0">
+                     <children>
+                        <Label fx:id="ordenTrasaccion" text="Orden de Trasaccion" />
+                        <Label fx:id="banco" text="Banco" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="TOP_CENTER" spacing="10.0">
+                     <children>
+                        <Label text="0=" />
+                        <Label fx:id="movimiento" text="+-1" />
+                        <Label fx:id="muestraAnterior" text="(0)" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </center>
+</BorderPane>
