@@ -21,7 +21,7 @@ public class GUI extends Application {
         ventana.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         escena.setRoot(loadFXML(fxml));
     }
 
