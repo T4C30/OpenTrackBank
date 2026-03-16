@@ -1,0 +1,43 @@
+/* Modo Oscuro - Escala de Grises Oscuros */
+.root {
+    -fx-base: #2C2C2C; /* Fondo oscuro */
+ /* Fondo muy oscuro */
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+}
+
+.button {
+    -fx-background-color: #444444; /* Gris oscuro */
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+    -fx-border-color: #333333; /* Borde gris oscuro */
+}
+
+.button:hover {
+    -fx-background-color: #333333; /* Gris más oscuro al pasar el mouse */
+}
+
+.label {
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+}
+
+.text-field, .password-field {
+    -fx-background-color: #333333; /* Fondo gris oscuro */
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+    -fx-border-color: #444444; /* Borde gris oscuro */
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #555555; /* Borde más claro cuando está enfocado */
+}
+
+.menu-bar {
+    -fx-background-color: #2C2C2C; /* Gris oscuro */
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+}
+
+.menu-item {
+    -fx-text-fill: #D1D1D1; /* Texto claro */
+}
+
+.menu-item:hover {
+    -fx-background-color: #444444; /* Gris medio al pasar el mouse */
+}

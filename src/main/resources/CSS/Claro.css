@@ -1,6 +1,43 @@
-.button{
-    -fx-background-color: black;
-    -fx-text-fill: white;
+/* Modo Claro - Escala de Grises Claros */
+.root {
+    -fx-base: #F0F0F0; /* Fondo claro */
+    -fx-background: #FFFFFF; /* Fondo blanco */
+    -fx-text-fill: #333333; /* Texto oscuro */
 }
 
+.button {
+    -fx-background-color: #DCDCDC; /* Gris claro */
+    -fx-text-fill: #333333; /* Texto oscuro */
+    -fx-border-color: #B0B0B0; /* Borde gris claro */
+}
 
+.button:hover {
+    -fx-background-color: #B0B0B0; /* Gris medio al pasar el mouse */
+}
+
+.label {
+    -fx-text-fill: #333333; /* Texto oscuro */
+}
+
+.text-field, .password-field {
+    -fx-background-color: #E8E8E8; /* Fondo gris claro */
+    -fx-text-fill: #333333; /* Texto oscuro */
+    -fx-border-color: #B0B0B0; /* Borde gris claro */
+}
+
+.text-field:focused, .password-field:focused {
+    -fx-border-color: #A8A8A8; /* Borde más oscuro cuando está enfocado */
+}
+
+.menu-bar {
+    -fx-background-color: #F5F5F5; /* Gris claro */
+    -fx-text-fill: #333333; /* Texto oscuro */
+}
+
+.menu-item {
+    -fx-text-fill: #333333; /* Texto oscuro */
+}
+
+.menu-item:hover {
+    -fx-background-color: #DCDCDC; /* Gris medio al pasar el mouse */
+}

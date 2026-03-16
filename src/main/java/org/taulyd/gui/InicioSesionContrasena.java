@@ -1,16 +1,18 @@
 package org.taulyd.gui;
 
-import java.io.IOException;
-
 import org.taulyd.seguridad.Cifrado;
 import org.taulyd.torrente.Gestor;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 public class InicioSesionContrasena {
+    @FXML
+    private Label textoRepetir;
+
     @FXML
     private TextField con;
 
@@ -23,17 +25,32 @@ public class InicioSesionContrasena {
 
     @FXML
     private void initialize() {
-        inicio.setOnMouseClicked(this::inicioSesion);
+        if (Gestor.existeContrasena()) {
+            inicio.setOnMouseClicked(this::inicioSesion);
+            repetirCon.setVisible(false);
+            textoRepetir.setVisible(false);
+        }else{
+            inicio.setText("Registrar Contraseña");
+            inicio.setOnMouseClicked(this::registrarSesion);
+        }
+    }
+
+    @FXML
+    private void registrarSesion(MouseEvent e){
+        if (con.getText().equals(repetirCon.getText())) {
+            if (Gestor.guardar(Cifrado.sha256(con.getText()))) {
+                cambio();
+            }
+        }  
+    }
+    
+    @FXML
+    private void cambio(){
+        GUI.setRoot("/FXML/PantallaPrincipal");
     }
 
     @FXML
     private void inicioSesion(MouseEvent e){
-        if (con.getText().equals(repetirCon.getText())) {
-            if (Gestor.recuperar(Cifrado.sha256(con.getText()))) {
-                try {
-                    GUI.setRoot("/FXML/PantallaPrincipal");
-                } catch (IOException ex) {System.err.println(ex.getMessage());}
-            }
-        }  
+        if (Gestor.recuperar(Cifrado.sha256(con.getText()))) cambio();
     }
 }

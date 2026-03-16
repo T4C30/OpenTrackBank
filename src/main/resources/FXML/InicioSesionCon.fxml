@@ -8,8 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.taulyd.gui.InicioSesionContrasena">
+<VBox alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" spacing="20.0" xmlns="http://javafx.com/javafx/24.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.taulyd.gui.InicioSesionContrasena">
    <children>
       <Label text="OTB" VBox.vgrow="ALWAYS">
          <font>
@@ -20,10 +19,10 @@
          </VBox.margin>
       </Label>
       <Region prefHeight="18.0" prefWidth="600.0" />
-      <Label prefHeight="16.0" prefWidth="250.0" text="Contraseña maestra" />
-      <TextField fx:id="con" prefHeight="24.0" promptText="Escribe la contraseña" />
-      <Label layoutX="292.0" layoutY="195.0" prefHeight="16.0" prefWidth="249.0" text="Repita la contraseña maestra" />
-      <TextField fx:id="repetirCon" layoutX="10.0" layoutY="211.0" prefHeight="24.0" promptText="Escribe la contraseña" />
-      <Button fx:id="inicio" mnemonicParsing="false" text="Iniciar Sesion" />
+      <Label alignment="CENTER" prefHeight="16.0" prefWidth="250.0" text="Contraseña maestra" VBox.vgrow="ALWAYS" />
+      <TextField fx:id="con" alignment="CENTER" promptText="Escribe la contraseña" VBox.vgrow="ALWAYS" />
+      <Label fx:id="textoRepetir" alignment="CENTER" layoutX="292.0" layoutY="195.0" prefHeight="16.0" prefWidth="249.0" text="Repita la contraseña maestra" VBox.vgrow="ALWAYS" />
+      <TextField fx:id="repetirCon" alignment="CENTER" layoutX="10.0" layoutY="211.0" promptText="Escribe la contraseña" VBox.vgrow="ALWAYS" />
+      <Button fx:id="inicio" mnemonicParsing="false" text="Iniciar Sesion" VBox.vgrow="ALWAYS" />
    </children>
 </VBox>
