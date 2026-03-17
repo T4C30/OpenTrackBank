@@ -14,7 +14,7 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 
 public class Gestor {
-    private static final String ENLACE = Gestor.class.getResource("/con.txt").getFile();
+    private static final String ENLACE = Gestor.class.getResource("/contra.txt").getFile();
     private static final String CP = Gestor.class.getResource("/cp.key").getFile();
 
     public static boolean guardar(String contra) {
