@@ -3,8 +3,9 @@ import 'login_page.dart';
 import 'register_page.dart';
 
 class InicioPage extends StatelessWidget {
-  const InicioPage({Key? key}) : super(key: key);
+  const InicioPage({super.key});
 
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +21,7 @@ class InicioPage extends StatelessWidget {
                 const Spacer(flex: 1),
                 
                 const Text(
-                  'Mi Fintech',
+                  'Open Track Bank',
                   textAlign: TextAlign.center,
                   style: TextStyle(
                     fontSize: 40,
@@ -59,7 +60,7 @@ class InicioPage extends StatelessWidget {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(builder: (context) => const RegisterPage()),
+                            MaterialPageRoute(builder: (context) => RegisterPage()),
                           );
                         },
                         style: OutlinedButton.styleFrom(

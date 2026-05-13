@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:open_track_bank/biblioteca.dart';
 import 'main_layout.dart';
 
 class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+  final TextEditingController correo = TextEditingController();
+  final TextEditingController con = TextEditingController();
+  final TextEditingController conRep = TextEditingController();
+
+  RegisterPage({super.key});
+
 
   @override
   Widget build(BuildContext context) {
@@ -13,31 +19,58 @@ class RegisterPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const TextField(
-              decoration: InputDecoration(labelText: 'Correo Electrónico'),
+            const Spacer(flex: 1),
+            const Text(
+              'Open Track Bank',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 40,
+                fontWeight: FontWeight.bold,
+                letterSpacing: -1.0,
+              ),
+            ),
+            const Text(
+              'Tu futuro financiero, hoy.',
+              textAlign: TextAlign.center,
+              style: TextStyle(color: Colors.grey, fontSize: 16),
+            ),
+            const Spacer(flex: 1),
+
+            TextField(
+              decoration: const InputDecoration(labelText: 'Correo Electrónico'),
               keyboardType: TextInputType.emailAddress,
+              controller: correo,
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
               decoration: InputDecoration(labelText: 'Contraseña'),
               obscureText: true,
+              controller: con,
             ),
             const SizedBox(height: 16),
-            const TextField(
+            TextField(
               decoration: InputDecoration(labelText: 'Repetir Contraseña'),
               obscureText: true,
+              controller: conRep,
             ),
-            const SizedBox(height: 32),
+            const SizedBox(height: 48),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushAndRemoveUntil(
-                  context,
-                  MaterialPageRoute(builder: (context) => const MainLayout()),
-                  (Route<dynamic> route) => false,
-                );
+                if (!minimoRegistro(correo.text, con.text, conRep.text)) {
+                  return;
+                }
+                if (comprobarRegistro(correo.text, con.text)) {
+                  Navigator.pushAndRemoveUntil(
+                    context,
+                    MaterialPageRoute(builder: (context) => const MainLayout()),
+                    (Route<dynamic> route) => false,
+                  );
+                }
+                
               },
               child: const Text('Registrarse'),
             ),
+            const Spacer(flex: 1)
           ],
         ),
       ),

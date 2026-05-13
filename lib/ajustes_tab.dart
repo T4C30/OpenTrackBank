@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:plaid_universal/plaid_universal.dart';
 
 class AjustesTab extends StatelessWidget {
-  const AjustesTab({Key? key}) : super(key: key);
+  const AjustesTab({super.key});
+
 
   @override
   Widget build(BuildContext context) {

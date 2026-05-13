@@ -6,7 +6,7 @@ void main() {
 }
 
 class MiFintechApp extends StatelessWidget {
-  const MiFintechApp({Key? key}) : super(key: key);
+  const MiFintechApp({super.key});
 
   @override
   Widget build(BuildContext context) {

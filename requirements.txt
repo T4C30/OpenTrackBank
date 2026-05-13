@@ -1,0 +1,5 @@
+flask
+flask-cors
+plaid-python
+python-dotenv
+Werkzeug

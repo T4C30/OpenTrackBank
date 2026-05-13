@@ -1,1 +1,5 @@
 /build
+/.dart_tool
+/ios
+/macos
+/web

@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:open_track_bank/biblioteca.dart';
 import 'transacciones_page.dart';
 
 class CuentaTab extends StatefulWidget {
-  const CuentaTab({Key? key}) : super(key: key);
+  const CuentaTab({super.key});
+
+  
 
   @override
   State<CuentaTab> createState() => _CuentaTabState();
@@ -12,7 +15,8 @@ class _CuentaTabState extends State<CuentaTab> {
   // Cambia esto a false para ver el mensaje de advertencia
   bool tieneCuentaEnlazada = true; 
   int cuentaIndex = 0;
-  List<String> cuentas = ["Cuenta Principal", "Ahorros"];
+  // TODO: Generar cuentas
+  List<String> cuentas = obtenerCuentas();
 
   @override
   Widget build(BuildContext context) {
@@ -30,6 +34,7 @@ class _CuentaTabState extends State<CuentaTab> {
       child: Column(
         children: [
           // Selector de cuenta y Saldo
+          // TODO: No me gusta el padding usar el spacer de login
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 32.0),
             child: Row(
@@ -45,7 +50,7 @@ class _CuentaTabState extends State<CuentaTab> {
                 Column(
                   children: [
                     Text(cuentas[cuentaIndex.abs()], style: const TextStyle(color: Colors.grey)),
-                    const Text('\$12,450.00', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+                    Text('12,450.00 €', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
                   ],
                 ),
                 Padding(
@@ -59,6 +64,9 @@ class _CuentaTabState extends State<CuentaTab> {
             ),
           ),
           const Divider(),
+
+
+
           // Últimas transacciones
           const Padding(
             padding: EdgeInsets.all(16.0),

@@ -4,8 +4,9 @@ import 'bolsa_tab.dart';
 import 'ajustes_tab.dart';
 
 class MainLayout extends StatefulWidget {
-  const MainLayout({Key? key}) : super(key: key);
+  const MainLayout({super.key});
 
+  
   @override
   State<MainLayout> createState() => _MainLayoutState();
 }
