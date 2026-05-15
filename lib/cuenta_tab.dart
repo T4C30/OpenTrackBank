@@ -13,10 +13,43 @@ class CuentaTab extends StatefulWidget {
 
 class _CuentaTabState extends State<CuentaTab> {
   // Cambia esto a false para ver el mensaje de advertencia
-  bool tieneCuentaEnlazada = true; 
+  late bool tieneCuentaEnlazada; 
   int cuentaIndex = 0;
-  // TODO: Generar cuentas
-  List<String> cuentas = obtenerCuentas();
+  late List<Map<String,dynamic>> cuentas;
+  late Map<String, dynamic> cuenta;
+
+  _CuentaTabState(){
+    cuentas = obtenerCuentas();
+    tieneCuentaEnlazada = cuentas.isNotEmpty;
+    if (tieneCuentaEnlazada) {
+      cuenta = cuentas[0];  
+    }else {
+      cuenta = {};
+    }
+  }
+
+  
+
+  void decrementar(){
+    setState(() {
+      if (cuentaIndex > 0) {
+        cuentaIndex--;
+        cuenta = cuentas[cuentaIndex]; 
+      }
+    });
+  }
+
+  void incrementar(){
+    setState(() {
+      if (cuentas.length-1 > cuentaIndex){
+        cuentaIndex++;
+        cuenta = cuentas[cuentaIndex];
+      }
+    });
+  }
+
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -33,36 +66,30 @@ class _CuentaTabState extends State<CuentaTab> {
     return SafeArea(
       child: Column(
         children: [
+          const SizedBox(height: 12),
+          Text(cuenta["nombre"], style: const TextStyle(color: Colors.grey)),
           // Selector de cuenta y Saldo
-          // TODO: No me gusta el padding usar el spacer de login
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 32.0),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_back_ios),
-                    onPressed: () => setState(() => cuentaIndex = (cuentaIndex - 1) % cuentas.length),
-                  )
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Spacer(flex: 2),
+              IconButton(
+                  icon: const Icon(Icons.arrow_back_ios),
+                  onPressed: () => decrementar(),
                 ),
-                Column(
-                  children: [
-                    Text(cuentas[cuentaIndex.abs()], style: const TextStyle(color: Colors.grey)),
-                    Text('12,450.00 €', style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
-                  ],
-                ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 60),
-                  child: IconButton(
-                    icon: const Icon(Icons.arrow_forward_ios),
-                    onPressed: () => setState(() => cuentaIndex = (cuentaIndex + 1) % cuentas.length),
-                  )
-                )
-              ],
-            ),
+              Spacer(),
+                                 
+              Text("${cuenta["saldo"]} €", style: TextStyle(fontSize: 36, fontWeight: FontWeight.bold)),
+
+              Spacer(),
+              IconButton(
+                icon: const Icon(Icons.arrow_forward_ios),
+                onPressed: () => incrementar(),
+              ),
+              Spacer(flex: 2,)
+            ],
           ),
+          const SizedBox(height: 12),
           const Divider(),
 
 
@@ -77,11 +104,7 @@ class _CuentaTabState extends State<CuentaTab> {
           ),
           Expanded(
             child: ListView(
-              children: const [
-                ListTile(leading: Icon(Icons.fastfood), title: Text('Restaurante'), trailing: Text('-\$45.00')),
-                ListTile(leading: Icon(Icons.shopping_cart), title: Text('Supermercado'), trailing: Text('-\$120.50')),
-                ListTile(leading: Icon(Icons.attach_money), title: Text('Nómina'), trailing: Text('+\$2,500.00', style: TextStyle(color: Colors.green))),
-              ],
+              children: obtenerUltimasTransacciones(cuenta["id"]),
             ),
           ),
           TextButton(
