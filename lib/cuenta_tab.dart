@@ -111,7 +111,7 @@ class _CuentaTabState extends State<CuentaTab> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const TransaccionesPage()),
+                MaterialPageRoute(builder: (context) => TransaccionesPage(id:cuenta["id"])),
               );
             },
             child: const Text('Ver todas las transacciones'),

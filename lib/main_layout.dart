@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'cuenta_tab.dart';
-import 'bolsa_tab.dart';
+import 'chat_tab.dart';
 import 'ajustes_tab.dart';
 
 class MainLayout extends StatefulWidget {
@@ -16,7 +16,7 @@ class _MainLayoutState extends State<MainLayout> {
 
   final List<Widget> _fragments = [
     const CuentaTab(),
-    const BolsaTab(),
+    const LlamaChatWidget(),
     const AjustesTab(),
   ];
 
@@ -33,7 +33,7 @@ class _MainLayoutState extends State<MainLayout> {
       bottomNavigationBar: BottomNavigationBar(
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(icon: Icon(Icons.account_balance_wallet), label: 'Cuenta'),
-          BottomNavigationBarItem(icon: Icon(Icons.show_chart), label: 'Bolsa'),
+          BottomNavigationBarItem(icon: Icon(Icons.chat), label: 'Chat'),
           BottomNavigationBarItem(icon: Icon(Icons.settings), label: 'Ajustes'),
         ],
         currentIndex: _selectedIndex,
