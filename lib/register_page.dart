@@ -55,11 +55,11 @@ class RegisterPage extends StatelessWidget {
             ),
             const SizedBox(height: 48),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 if (!minimoRegistro(correo.text, con.text, conRep.text)) {
                   return;
                 }
-                if (comprobarRegistro(correo.text, con.text)) {
+                if (await comprobarRegistro(correo.text, con.text)) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const MainLayout()),

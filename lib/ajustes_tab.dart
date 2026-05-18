@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:open_track_bank/biblioteca.dart';
 import 'package:open_track_bank/inicio_page.dart';
 import 'package:plaid_universal/plaid_universal.dart';
 
@@ -66,8 +67,7 @@ class AjustesTab extends StatelessWidget {
             ElevatedButton.icon(
               onPressed: () async {
                 // Primero obtener el token, usar ela funcion create_link_token
-                String token =
-                    "link-sandbox-39cd53ee-b656-46b7-bbe6-5efe149262f6";
+                String token = await obtenerToken();
                 final result = await Navigator.of(context).push<String>(
                   MaterialPageRoute(
                     builder: (context) => PlaidUniversal(
@@ -82,7 +82,7 @@ class AjustesTab extends StatelessWidget {
                   ),
                 );
                 // Guardar el access token, get_access_token
-                print(result);
+                enviarAccessToken(result);
               },
               icon: const Icon(Icons.account_balance),
               style: ElevatedButton.styleFrom(

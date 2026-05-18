@@ -51,8 +51,19 @@ def init_db():
         CREATE TABLE IF NOT EXISTS users (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             username TEXT UNIQUE NOT NULL,
-            password TEXT NOT NULL,
-            access_token TEXT
+            password TEXT NOT NULL
+        )
+    ''')
+    c.execute('''
+        CREATE TABLE IF NOT EXISTS plaid_items (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            user_id INTEGER NOT NULL,
+            item_id TEXT UNIQUE NOT NULL,
+            access_token TEXT NOT NULL,
+            institution_name TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+
+            FOREIGN KEY(user_id) REFERENCES users(id)
         )
     ''')
     conn.commit()
@@ -131,7 +142,7 @@ def create_link_token():
         request_data = LinkTokenCreateRequest(
             products=[Products('transactions')],
             client_name="Mi App Flutter",
-            country_codes=[CountryCode('ES'), CountryCode('US')],
+            country_codes=[CountryCode('ES')],
             language='es',
             user=LinkTokenCreateRequestUser(client_user_id=str(user_id))
         )
@@ -143,7 +154,6 @@ def create_link_token():
 
 @app.route('/api/set_access_token', methods=['POST'])
 def get_access_token():
-    """Intercambia el token y ACTUALIZA el access_token del usuario en SQLite"""
     public_token = request.json.get('public_token')
     user_id = request.json.get('user_id')
 
@@ -151,17 +161,62 @@ def get_access_token():
         return jsonify({'error': 'Faltan datos'}), 400
 
     try:
-        exchange_request = ItemPublicTokenExchangeRequest(public_token=public_token)
-        exchange_response = client.item_public_token_exchange(exchange_request)
-        access_token = exchange_response['access_token']
+        # Intercambiar public_token por access_token
+        exchange_request = ItemPublicTokenExchangeRequest(
+            public_token=public_token
+        )
 
-        # Guardamos el access_token en la base de datos
+        exchange_response = client.item_public_token_exchange(
+            exchange_request
+        )
+
+        access_token = exchange_response['access_token']
+        item_id = exchange_response['item_id']
+
+        # Obtener info de la institución
+        item_response = client.item_get(
+            ItemGetRequest(access_token=access_token)
+        )
+
+        institution_id = item_response['item']['institution_id']
+
+        institution_name = None
+
+        if institution_id:
+            institution_response = client.institutions_get_by_id(
+                InstitutionsGetByIdRequest(
+                    institution_id=institution_id,
+                    country_codes=['US']
+                )
+            )
+
+            institution_name = institution_response['institution']['name']
+
+        # Guardar NUEVO banco
         conn = get_db_connection()
-        conn.execute("UPDATE users SET access_token = ? WHERE id = ?", (access_token, user_id))
+
+        conn.execute("""
+            INSERT INTO plaid_items (
+                user_id,
+                access_token,
+                item_id,
+                institution_name
+            )
+            VALUES (?, ?, ?, ?)
+        """, (
+            user_id,
+            access_token,
+            item_id,
+            institution_name
+        ))
+
         conn.commit()
         conn.close()
 
-        return jsonify({'message': 'Banco enlazado correctamente y token guardado.'})
+        return jsonify({
+            'message': 'Banco enlazado correctamente'
+        })
+
     except plaid.ApiException as e:
         return jsonify({'error': str(e)}), 400
 

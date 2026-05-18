@@ -34,20 +34,22 @@ class LoginPage extends StatelessWidget {
               style: TextStyle(color: Colors.grey, fontSize: 16),
             ),
             const Spacer(flex: 1),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Correo Electrónico'),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Correo Electrónico'),
               keyboardType: TextInputType.emailAddress,
+              controller: correo,
             ),
             const SizedBox(height: 16),
-            const TextField(
-              decoration: InputDecoration(labelText: 'Contraseña'),
+            TextField(
+              decoration: const InputDecoration(labelText: 'Contraseña'),
               obscureText: true,
+              controller: con,
             ),
             const SizedBox(height: 48),
             ElevatedButton(
-              onPressed: () {
+              onPressed: () async {
                 // Navegar a la pantalla principal tras "iniciar sesión"
-                if (comprobarSesion(correo.text, con.text)) {
+                if (await comprobarSesion(correo.text, con.text)) {
                   Navigator.pushAndRemoveUntil(
                     context,
                     MaterialPageRoute(builder: (context) => const MainLayout()),

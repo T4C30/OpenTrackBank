@@ -1,7 +1,12 @@
 
 // Comprobar que el correo y la contra este bien puesto
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:open_track_bank/modelo/icono.dart';
+import 'package:http/http.dart' as http;
+
+late int userId;
 
 bool minimoRegistro(String email, String con, String repetirCon){
   if (!email.contains("@")) {
@@ -16,14 +21,97 @@ bool minimoRegistro(String email, String con, String repetirCon){
 }
 
 // Comprobar que no exista en la base de datos
-bool comprobarRegistro(String email, String con) {
-  // Hacer aqui la api de python
-  return true;
+Future<bool> comprobarRegistro(String email, String con) async {
+  final url = Uri.parse("http://localhost:5000/api/register");
+
+  final respuesta = await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: jsonEncode({
+      "username": email,
+      'password': con
+    })
+  
+  );
+  
+  final data = jsonDecode(respuesta.body);
+  if (respuesta.statusCode == 201) {
+    userId = data["user_id"];
+    return true;
+  }
+  return false;
 }
 
-bool comprobarSesion(String email, String con){
-  return true;
+Future<bool> comprobarSesion(String email, String con) async {
+  final url = Uri.parse("http://localhost:5000/api/login");
+
+  final respuesta = await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: jsonEncode({
+      "username": email,
+      'password': con
+    })
+  
+  );
+
+  final data = jsonDecode(respuesta.body);
+  if (respuesta.statusCode == 200) {
+    userId = data["user_id"];
+    return true;
+  }
+  return false;
+  
 }
+
+
+Future<String> obtenerToken() async{
+  final url = Uri.parse("http://localhost:5000/api/create_link_token");
+
+  final respuesta = await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: jsonEncode({
+      "user_id": userId
+    })
+  
+  );
+
+
+  final data = jsonDecode(respuesta.body);
+  if (respuesta.statusCode != 400) {
+    return data["link_token"];
+  }
+  
+  return data["error"];
+}
+
+Future<void> enviarAccessToken(String? accessToken) async{
+  final url = Uri.parse("http://localhost:5000/api/set_access_token");
+
+  await http.post(
+    url,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: jsonEncode({
+      "user_id": userId,
+      "public_token": accessToken
+    })
+  
+  );
+}
+
+
+
+
+
 
 String systemPrompt = """
 Eres Gema, una IA local instalada en el dispositivo del usuario.
